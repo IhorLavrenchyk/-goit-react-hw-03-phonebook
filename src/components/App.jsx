@@ -19,17 +19,39 @@ class App extends Component {
     filter: '',
   };
 
-  addContact = (name, number) => {
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevState) {
     const { contacts } = this.state;
+    if (contacts !== prevState.contacts) {
+      console.log('changed contacts');
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
+
+  addContact = ({ name, number }) => {
+    const { contacts } = this.state;
+
+    const isInContacts = contacts.find(
+      contact => name.toLowerCase() === contact.name.toLowerCase()
+    );
+    if (isInContacts) {
+      toast.info(`${name} is already in contacts.`);
+      return;
+    }
+
     const newContact = {
       id: nanoid(),
       name,
       number,
     };
-    if (contacts.find(contact => contact.name === newContact.name)) {
-      toast.info(`${newContact.name} is already in contacts.`);
-      return;
-    }
+
     this.setState(({ contacts }) => ({
       contacts: [newContact, ...contacts],
     }));
@@ -64,11 +86,17 @@ class App extends Component {
         <ContactForm onSubmit={this.addContact} />
 
         <h2>Contacts</h2>
-        <Filter value={this.state.filter} onChange={this.changeFilter} />
-        <ContactList
-          contacts={visibleContacts}
-          onDeleteContact={this.deleteContact}
-        />
+        {this.state.contacts.length > 0 ? (
+          <div>
+            <Filter value={this.state.filter} onChange={this.changeFilter} />
+            <ContactList
+              contacts={visibleContacts}
+              onDeleteContact={this.deleteContact}
+            />
+          </div>
+        ) : (
+          <p>Please, add contact ☝️</p>
+        )}
       </div>
     );
   }
