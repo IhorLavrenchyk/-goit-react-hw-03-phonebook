@@ -1,0 +1,37 @@
+.contacts {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 30px 15px;
+  border-radius: 8px;
+  background-color: beige;
+}
+
+.contact__list {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.contact__item {
+  display: block;
+  min-width: 140px;
+}
+
+.contacts__button {
+  display: block;
+  min-width: 64px;
+  padding: 2px 6px;
+  border: none;
+  border-radius: 8px;
+  color: darkcyan;
+  background-color: greenyellow;
+}
+
+.contacts__button:hover,
+.contacts__button:focus {
+  background-color: rgb(121, 194, 13);
+}

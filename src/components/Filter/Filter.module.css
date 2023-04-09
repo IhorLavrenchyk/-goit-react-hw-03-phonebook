@@ -1,0 +1,22 @@
+.filter {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  font-size: 700;
+  border-radius: 8px;
+  padding: 30px 15px;
+  background-color: beige;
+}
+
+.filter__input {
+  display: block;
+  background-color: inherit;
+  border: none;
+  border-bottom: 2px solid greenyellow;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.filter__input:focus {
+  outline: none;
+}

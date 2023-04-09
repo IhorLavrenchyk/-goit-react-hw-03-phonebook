@@ -1,0 +1,10 @@
+.phonebook__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: darkcyan;
+}
+ul,
+li {
+  list-style: none;
+}
